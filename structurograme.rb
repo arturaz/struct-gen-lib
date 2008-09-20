@@ -157,7 +157,7 @@ class Structurograme
     end.join
   end
 
-  def initialize(node, font, size=12, width=600, padding=10)
+  def initialize(node, font, size=12, width=600)
     # Some constants
     @color = {
       'white' => GD::Image.trueColor("#FFFFFF"),
@@ -166,7 +166,7 @@ class Structurograme
     @font = font
     @size = size.to_i
     @width = width.to_i
-    @padding = padding.to_i
+    @padding = (@size * 0.85).to_i
 
     # Let's find out how wide one char is.
     @char_width = @size * 0.8
