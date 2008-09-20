@@ -6,31 +6,36 @@
 # @author Artūras Šlajus <x11@arturaz.net>
 # @license http://creativecommons.org/licenses/LGPL/2.1/ CC-GNU LGPL
 
-
 class Structurograme
   require 'xml/libxml'
   require 'GD'
 
   module Node
   
-    # Yay, thanks Aria from #ruby-lang on freenode ;-)
-    def self.attr_parent(*args)
+    # Makes attributes in _args_ to be accessed from _@parent_. If
+    # _@parent_ is nil (current _Node_ is the root node) then return
+    # _@arg_. See Node#get_from_root_node for more.
+    #
+    # P.S.: Thanks Aria from #ruby-lang on freenode ;-)
+    def self.attr_from_root_node(*args)
       args.each do |arg|
         define_method(arg) do
-          get_from_parent("#{arg}")
+          get_from_root_node("#{arg}")
         end
       end
     end
     
-    attr_parent :font, :size, :width, :indent, :char_width, :char_height, \
-      :padding, :img
+    attr_from_root_node :font, :size, :width, :indent, :char_width, \
+      :char_height, :padding, :img
     attr_accessor :parent
-
+    
+    # Return _Node_ color.
     def color(key)
-      get_from_parent('color', key)
+      get_from_root_node('color', key)
     end
 
-    def get_from_parent(attr, key=nil)
+    # Get attribute _attr_ from the root node.
+    def get_from_root_node(attr, key=nil)
       if @parent.nil?
         v = instance_variable_get("@#{attr}")
         if key.nil?
@@ -39,10 +44,12 @@ class Structurograme
           v[key]
         end
       else
-        @parent.get_from_parent(attr, key)
+        @parent.get_from_root_node(attr, key)
       end
     end
     
+    # Return according #stringTTF method depending if it's _fake_run_ or not.
+    # If it's fake then nothing is actually rendered on the image.
     def get_stringTTF(fake_run)
       if fake_run
         stringTTF = GD::Image.method(:stringTTF)
@@ -52,13 +59,16 @@ class Structurograme
       stringTTF
     end
 
-    # We need this, because char_height needs to be appended (because coords for
-    # stringTTF starts at bottomleft of first line)
+    # Compute Y coordinate where text starts for given _text_ and _y_.
+    #
+    # We need this, because char_height needs to be appended (because 
+    # coords for stringTTF starts at bottomleft of first line)
     def y_start_for_text(y, text)
       y_start = y + padding
       y_start += char_height if text != ""
     end
 
+    # Rewrap _text_ so it would fit into a box. 
     def boxed_text(text, text_width)
       # Text that fits into the box! ;-)
       code_started = false
@@ -76,8 +86,8 @@ class Structurograme
     end
   end
 
-  class NotXMLNodeException < Exception
-  end
+  # Exception to be raised if we're trying to give not XML node.
+  class NotXMLNodeException < Exception; end
 
   include Structurograme::Node
 
@@ -131,9 +141,7 @@ class Structurograme
 
   # Raises exception if _node_ is not XML::Node
   def self.xml_node_check!(node)
-    if not node.is_a? XML::Node
-      raise Structurograme::NotXMLNodeException
-    end
+    raise Structurograme::NotXMLNodeException unless node.is_a? XML::Node
   end
 
   # Wraps text
