@@ -202,25 +202,29 @@ class Structurograme
   end
 end
 
-class Structurograme::Holder < Array
+# Simple class that extends _Array_ for holding other elements in 
+# _Structurograme_. This acts as _Node_.
+class Structurograme::Holder < Array #{{{
   include Structurograme::Node
 
-  alias old_push push
-  
-  # Assign _node_ _self_ as parent.
+  alias old_push push  
+  # Add a node to holder. Also assign _self_ as parent to _node_ if it 
+  # supports it.
   def push(node)
     node.parent = self if node.respond_to? 'parent'
     old_push(node)
   end
 
+  # Render all nodes that we're holding and return end coordinates: [x, y].
   def render_at(x, y, fake_run=false)
     each do |node|
       x, y = node.render_at(x, y, fake_run)
     end
     [x, y]
   end
-end
+end # }}}
 
+# Class representing block clauses.
 class Structurograme::Block < String # {{{
   include Structurograme::Node
 
@@ -229,6 +233,7 @@ class Structurograme::Block < String # {{{
     super(content)
   end
 
+  # Override this method to change left and right margins. Defaults to 0.
   def margin; 0; end
 
   def render_at(x, y, fake_run=false)
@@ -260,18 +265,20 @@ class Structurograme::Block < String # {{{
   end
 end # }}}
 
+# Represents call clauses.
 class Structurograme::Call < Structurograme::Block # {{{
+  # Left and right margin.
   def margin
-    if padding == 0
-      5
-    else
-      5 + padding
-    end
+    margin = 5
+    margin += padding if padding
+    margin
   end
 
+  # Same as super#render_at but add two lines at left and right sides.
   def render_at(x, y, fake_run=false)
     x, y_end = super(x, y, fake_run)
     x, x_end = x
+
     if not fake_run
       img.rectangle(
         x, y,
