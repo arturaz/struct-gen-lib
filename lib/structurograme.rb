@@ -7,7 +7,7 @@
 # @license http://creativecommons.org/licenses/LGPL/2.1/ CC-GNU LGPL
 
 require 'xml/libxml'
-require 'GD'
+require 'gd2'
 require 'structurograme/node.rb'
 require 'structurograme/holder.rb'
 require 'structurograme/block.rb'

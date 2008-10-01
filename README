@@ -1,0 +1,10 @@
+== Requirements
+
+=== Gems
+
+* libxml-ruby
+* gd2
+
+=== Libraries
+
+* GD. If you're on windows download them from http://gnuwin32.sourceforge.net/packages/gd.htm
