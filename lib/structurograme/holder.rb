@@ -10,7 +10,6 @@ class Structurograme
     # Add a node to holder. Also assign _self_ as parent to _node_ if it 
     # supports it.
     def push(node)
-      puts node.class.inspect
       node.parent = self if node.respond_to? :parent
       super(node)
     end

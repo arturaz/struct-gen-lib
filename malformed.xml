@@ -1,0 +1,14 @@
+<s>
+ <block>Hello</block
+ <call>I am your friend</call>
+ <if clause="Are we friendly?">
+  <true>
+   <block>Hurray!</block>
+  </true>
+  <false width="80">
+   <while clause="While we're unfriendly">
+    <block>&lt;Friendlyness++&gt;</block>
+   </while>
+  </false>
+ </if>
+</s>

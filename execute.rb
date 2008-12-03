@@ -31,7 +31,13 @@ $KCODE = 'u'
 require 'jcode'
 
 # Create XML document
-doc = XML::Document.file(Pathname.new(input_fname).realpath.to_s)
+XML::Error.set_handler(&XML::Error::QUIET_HANDLER)
+begin
+  doc = XML::Parser.string(File.read(input_fname)).parse
+rescue LibXML::XML::Error => e
+  puts e.message
+  exit
+end
 
 # Create new structurograme
 s = Structurograme.new(
