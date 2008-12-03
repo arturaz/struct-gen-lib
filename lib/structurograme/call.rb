@@ -1,6 +1,7 @@
+$LOAD_PATH.push File.dirname(__FILE__)
 require 'block.rb'
 
-module Stucturograme
+class Structurograme
   # Represents call clauses.
   class Call < Block
     # Left and right margin.
@@ -11,18 +12,15 @@ module Stucturograme
     end
 
     # Same as super#render_at but add two lines at left and right sides.
-    def render_at(x, y, fake_run=false)
-      x, y_end = super(x, y, fake_run)
+    def render_at(x, y)
+      super(x, y)
       x, x_end = x
 
-      if not fake_run
-        img.rectangle(
-          x, y,
-          x_end, y_end,
-          color('black')
-        )
-      end
-      [[x, x_end], y_end] 
+      draw.rectangle(
+        x, y,
+        x_end, y + height
+      )
+      true
     end
   end
 end

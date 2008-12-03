@@ -1,0 +1,7 @@
+<s>
+ <block>Hello</block>
+ <call>I am your friend</call>
+    <while clause="While we're unfriendly">
+    <block>&lt;Friendlyness++&gt;</block>
+   </while>
+</s>

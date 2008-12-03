@@ -42,6 +42,6 @@ s = Structurograme.new(
 )
 
 # Write output to file.
-f = File.new(output_fname, 'wb')
-f.write s.render
-f.close 
+File.open(output_fname, 'wb') do |f|
+  f.write s.render
+end
