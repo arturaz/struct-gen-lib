@@ -77,7 +77,7 @@ class Structurograme
     @font_path = font_path
     @font_size = font_size.to_i
     @width = width.to_i
-    @padding = (@font_size * 0.85).to_i
+    @padding = (@font_size * 0.65).to_i
     
     @x_boundaries = [
       # Left
@@ -109,6 +109,7 @@ class Structurograme
     @draw.font_style = NormalStyle
     @draw.font_weight = 100
     @draw.font = "cour.ttf"
+    @draw.pointsize = @font_size
     
     @image = Image.new(@width + 2, height + @padding) do
       self.background_color = 'white'

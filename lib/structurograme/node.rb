@@ -37,7 +37,7 @@ class Structurograme
     # We need this, because #char_height needs to be appended (because 
     # coords for text starts at bottomleft of first line)
     def y_start_for_text(y, text)
-      y + padding + (text.blank? ? 0 : char_height)
+      y + padding + (text.blank? ? 0 : char_height) + 2
     end
 
     # Rewrap _text_ so it would fit into a box. 
