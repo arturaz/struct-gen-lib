@@ -1,10 +1,20 @@
 == Requirements
 
+Ruby! You can get 1.8.7 from http://www.ruby-lang.org/
+
+=== Updating rubygems
+
+  gem update --system
+
 === Gems
 
 * libxml-ruby
-* gd2
+* rmagick
 
-=== Libraries
+  gem install libxml-ruby rmagick
 
-* GD. If you're on windows download them from http://gnuwin32.sourceforge.net/packages/gd.htm
+=== If you're on windows
+
+* Download ImageMagick and rmagick gems from http://rubyforge.org/frs/?group_id=12&release_id=27880
+
+Install .exe first, then .gem (with gem install).
