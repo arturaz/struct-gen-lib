@@ -10,6 +10,8 @@ $LOAD_PATH.push File.dirname(__FILE__)
 
 require 'xml/libxml'
 require 'extensions/libxml.rb'
+XML::Error.set_handler(&XML::Error::QUIET_HANDLER)
+
 require 'RMagick'
 require 'activesupport'
 require 'tempfile'
@@ -68,8 +70,13 @@ class Structurograme
 
   # Wraps _text_ to given _length_.
   def self.wrap_text(text, length=80)
-    # We need gsub to account for empty lines.
-    text.scan(/.{0,#{length}}/).join("\n").gsub("\n\n", "\n")
+    # If we're running out of space - render single space
+    if length <= 0
+      " "
+    else
+      # We need gsub to account for empty lines.
+      text.scan(/.{0,#{length}}/).join("\n").gsub("\n\n", "\n")
+    end
   end
 
   # Parse from given root node. Set default values.
@@ -101,6 +108,7 @@ class Structurograme
 
   def render    
     @draw = Draw.new
+    @draw.fill('black')
     @draw.fill_opacity(0)
     @draw.stroke('black')
     @draw.stroke_width(1)
