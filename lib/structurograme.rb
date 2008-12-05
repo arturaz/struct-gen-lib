@@ -23,6 +23,14 @@ require 'structurograme/call.rb'
 require 'structurograme/if.rb'
 require 'structurograme/while.rb'
 
+class CustomDraw < Magick::Draw
+  def text(*args)
+    opacity(1)
+    super(*args)
+    fill_opacity(0)
+  end
+end
+
 class Structurograme  
   # Exception to be raised if we're trying to give not XML node.
   class NotXMLNodeException < Exception; end
@@ -107,17 +115,15 @@ class Structurograme
   end
 
   def render    
-    @draw = Draw.new
+    @draw = CustomDraw.new
     @draw.fill('black')
     @draw.fill_opacity(0)
     @draw.stroke('black')
     @draw.stroke_width(1)
     
-    @draw.font_stretch = ExpandedStretch
-    @draw.font_style = NormalStyle
-    @draw.font_weight = 100
-    @draw.font = "cour.ttf"
+    @draw.font = @font_path
     @draw.pointsize = @font_size
+    @draw.font_family = "Courier New"
     
     @image = Image.new(@width + 2, height + @padding) do
       self.background_color = 'white'

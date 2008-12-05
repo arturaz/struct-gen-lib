@@ -24,7 +24,7 @@ input_fname, output_fname, font, size, width = ARGV
 
 require 'xml/libxml'
 require 'pathname'
-require "lib/structurograme.rb"
+require File.expand_path(File.dirname(__FILE__) + '/lib/structurograme.rb')
 
 # Turn on Unicode support
 $KCODE = 'u'
