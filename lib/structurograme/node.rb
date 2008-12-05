@@ -19,16 +19,11 @@ class Structurograme
     attr_accessor :parent
 
     # Get attribute _attr_ from the root node.
-    def get_from_root_node(attr, key=nil)
+    def get_from_root_node(attr)
       if @parent.nil?
-        v = instance_variable_get("@#{attr}")
-        if key.nil?
-          v
-        else
-          v[key]
-        end
+        instance_variable_get("@#{attr}")
       else
-        @parent.get_from_root_node(attr, key)
+        @parent.get_from_root_node(attr)
       end
     end
 

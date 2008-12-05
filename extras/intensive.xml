@@ -1,0 +1,41 @@
+<s>
+ <block>Hello</block>
+ <block></block>
+ <call>I am your friend</call>
+ <if clause="Are we friendly?">
+  <true>
+   <block>Hurray!</block>
+  </true>
+  <false width="80">
+   <while clause="While we're unfriendly">
+    <block>&lt;Friendlyness++&gt;</block>
+   </while>
+  </false>
+ </if>
+ <if clause="true ratio">
+  <true width="80">
+   <block>true ratio</block>
+  </true>
+  <false>
+   <block>true ratio</block>
+  </false>
+ </if>
+ <if clause="no ratio">
+  <true>
+   <block>No ratio</block>
+  </true>
+  <false>
+   <block>No ratio</block>
+  </false>
+ </if>
+ <if clause="no false">
+  <true>
+   <block>No false</block>
+  </true>
+ </if>
+ <if clause="no true">
+  <false>
+   <block>No true</block>
+  </false>
+ </if>
+</s>

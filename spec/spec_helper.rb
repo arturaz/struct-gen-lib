@@ -15,3 +15,5 @@ Spec::Runner.configure do |config|
   # 
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
 end
+
+FONT = File.expand_path(File.dirname(__FILE__) + '/../extras/cour.ttf')

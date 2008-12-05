@@ -10,8 +10,9 @@ Ruby! You can get 1.8.7 from http://www.ruby-lang.org/
 
 * libxml-ruby
 * rmagick
+* activesupport
 
-  gem install libxml-ruby rmagick
+  gem install libxml-ruby rmagick activesupport
 
 === If you're on windows
 
