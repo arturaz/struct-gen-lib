@@ -1,9 +1,5 @@
-# This file is copied to ~/spec when you run 'ruby script/generate rspec'
-# from the project root directory.
-ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
-require 'spec/rails'
+require File.expand_path(File.dirname(__FILE__) + '/../lib/structurograme.rb')
 
 Spec::Runner.configure do |config|
   # == Mock Framework
@@ -19,3 +15,5 @@ Spec::Runner.configure do |config|
   # 
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
 end
+
+FONT = File.expand_path(File.dirname(__FILE__) + '/../extras/cour.ttf')

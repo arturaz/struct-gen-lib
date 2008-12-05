@@ -1,0 +1,25 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>Strūktūrogramų generatorius</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<%= stylesheet_link_tag "main" %>
+	<%= javascript_include_tag "prototype", "effects", "application" %>
+</head>
+
+<body>
+<div id="holder">
+    <div id="logo"><%= image_tag "logo.png" %></div>
+    <div id="content">
+        <%= yield %>
+    </div>    
+</div>
+
+<%= javascript_include_tag "http://www.google-analytics.com/urchin.js" %>
+<%= javascript_tag '_uacct = "UA-1799100-2"; urchinTracker();' %>
+
+</body>
+</html>

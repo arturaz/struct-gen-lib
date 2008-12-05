@@ -1,0 +1,47 @@
+#text_area textarea {
+width: 50em;
+height: 13em;
+}
+.right {
+text-align: right;
+}
+.center {
+text-align: center;
+}
+
+#holder {
+margin: 0.5em auto;
+width: 50em;
+padding: 0em 1em;
+border-left: 5px black double;
+border-right: 5px black double;
+}
+#logo {
+text-align: center;
+margin-bottom: 3em;
+}
+#setup table {
+width: 100%;
+}
+#setup table th {
+text-align: left;
+width: 9em;
+}
+#explanation div.holder {
+margin: 0em 1.5em;
+clear: both;
+}
+#explanation div.item {
+border-left: 2px black solid;
+border-right: 2px black solid;
+margin: 1em;
+float: left;
+width: 21em;
+}
+#explanation div.item p {
+font-family: monospace;
+margin: 0.5em 1em;
+padding: 0.5em 1em;
+border-top: 1px black dashed;
+border-bottom: 1px black dashed;
+}

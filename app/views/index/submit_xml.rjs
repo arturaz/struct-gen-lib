@@ -1,0 +1,9 @@
+
+page.replace_html('structurograme',
+  "<div id='struct_loading'>" + image_tag('progress.gif') +
+  " Kraunasi...</div>" +
+  image_tag(
+    url_for(:action => "get_structurograme", :random => Time.now.to_i),
+    {:onload => "Element.update('struct_loading', '')"}
+  ) )
+page.visual_effect(:highlight, 'ajax_info')

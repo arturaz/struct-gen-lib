@@ -1,0 +1,133 @@
+<% form_for :structurograme do |f| %>
+<div>
+    <div id="errors">
+      <% if @structurograme and ! @structurograme.errors.blank? %>
+        <%= render :partial => 'errors', :locals => {:errors => @structurograme.errors} %>
+      <% end %>
+    </div>
+    <div id="text_area" class="center">
+        <%= f.text_area :xml, {:rows => 10, :cols => 95} %>
+    </div>
+    <div id="setup">
+        <table>
+            <tr>
+                <th><label for="size">Šrifto dydis:</label></th>
+                <th><label for="size">Paveiksliuko plotis:</label></th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <td><%= f.text_field :size %></td>
+                <td><%= f.text_field :width %></td>
+                <td class="right"><%= submit_tag "Sugeneruoti!" %></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<% end %>
+
+<div id="progress"></div>
+<div id="ajax_info"></div>
+
+<div id="result">
+    <h2>Rezultatas</h2>
+    <div id="structurograme">Čia atsiras strūktūrograma.</div>
+</div>
+
+<div id="explanation">
+    <h2>Paaiškinimai</h2>
+    <p>Strūktūrograma rašoma XML kalba.
+    Joje galima naudoti tokius elementus:</p>
+    <div class="holder">
+        <div class="item">
+            <div class="center"><%= image_tag "elements/block.png" %></div>
+            <p>
+            &lt;block&gt;Bloką&lt;/block&gt;
+            </p>
+        </div>
+        <div class="item">
+            <div class="center"><%= image_tag "elements/call.png" %></div>
+            <p>
+            &lt;call&gt;Iškvietimą&lt;/call&gt;
+            </p>
+        </div>
+    </div>
+    <div class="holder">
+        <div class="item" style="height: 16em;">
+            <div class="center"><%= image_tag "elements/while.png" %></div>
+            <p>
+            &lt;while clause="Sąlygos sakinį"&gt;<br />
+            &nbsp;&lt;block&gt;Ciklo elementas&lt;/block&gt;<br />
+            &lt;/while&gt;
+            </p>
+        </div>
+        <div class="item" style="height: 16em;">
+            <div class="center"><%= image_tag "elements/if.png" %></div>
+            <p>
+            &lt;if clause="Šakojimo sakinį"&gt;<br />
+            &nbsp;&lt;true width="50"&gt;<br />
+            &nbsp;&nbsp;&lt;block&gt;True šaka&lt;/block&gt;<br />
+            &nbsp;&lt;/true&gt;<br />
+            &nbsp;&lt;false width="50"&gt;<br />
+            &nbsp;&nbsp;&lt;block&gt;False šaka&lt;/block&gt;<br />
+            &nbsp;&lt;/false&gt;<br />
+            &lt;/if&gt;
+            </p>
+        </div>
+    </div>
+    <div class="holder">&nbsp;</div>
+
+    <p>Strūktūrograma turi būti įvilkta į
+    &lt;structurograme&gt; &lt;/structurograme&gt;,
+    &lt;struct&gt; &lt;/struct&gt; arba tiesiog 
+    &lt;s&gt; &lt;/s&gt; tagus
+    (galima ir be jų, tada jie bus pridėti automatiškai).</p>
+
+    <p>Šakojimo sakinyje plotį (width) reikia nurodyti procentais (pvz.: 30). 
+    Plotį nurodyt reikia tik vienam iš true arba false blokų.
+    Jo galima ir išvis nenurodyti, tada programa jį suskaičiuos pati.</p>
+    
+    <h3>Dėmėsio !!!</h3>
+    <p>Kadangi XML kalboje &lt; ir &gt; ženklai turi specialią reikšmę, juos
+    reikia keisti:</p>
+    <ul>
+        <li>&lt; į &amp;lt; arba \&lt;</li>
+        <li>&gt; į &amp;gt; arba \&gt;</li>
+    </ul>
+    <p>Taipogi, jeigu tarp dvigubų kabučių norite panaudoti dar vienas 
+    dvigubas kabutes, jas reikia keisti į: &amp;quot; arba \".</p>
+    
+    <h3>Pavyzdys</h3>
+    <div class="holder">
+      <div class="item" style="width: auto">
+      <p>
+      &lt;s&gt;<br />
+      &nbsp;&lt;block&gt;Labas&lt;/block&gt;<br />
+      &nbsp;&lt;call&gt;Aš esu tavo draugas&lt;/call&gt;<br />
+      &nbsp;&lt;if clause="Ar mes draugiški?"&gt;<br />
+      &nbsp;&nbsp;&lt;true&gt;<br />
+      &nbsp;&nbsp;&nbsp;&lt;block&gt;Valio!&lt;/block&gt;<br />
+      &nbsp;&nbsp;&lt;/true&gt;<br />
+      &nbsp;&nbsp;&lt;false width="80"&gt;<br />
+      &nbsp;&nbsp;&nbsp;&lt;while clause="Kol mes nedraugiški"&gt;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&lt;block&gt;\&lt;Draugiškumas\&gt;++&lt;/block&gt;
+      <br />
+      &nbsp;&nbsp;&nbsp;&lt;/while&gt;<br />
+      &nbsp;&nbsp;&lt;/false&gt;<br />
+      &nbsp;&lt;/if&gt;<br />
+      &lt;/s&gt;
+      </p>
+      </div>
+    </div>
+    <div class="holder">&nbsp;</div>
+    
+    <h2>Source</h2>
+    <p>Jeigu norite, galite parsisųsti <%= link_to "išeities kodą",
+        "/source/struct-gen.zip" %>
+    (Rails'ų app ir Ruby modulio). Naudokit kur norit, būtų
+    malonu, jei paminėtumėt ir mane ;-)</p>
+    
+    <p>Visi atsiliepimai į <a
+    href="http://www.arturaz.net/blog/i-am-half-a-robot/strukturogramos-in-the-web/"
+    >mano blog'ą</a>.</p>
+    <p>&copy; 2006-2008, <a href="http://www.arturaz.net/">Artūras Šlajus</a>.</p>
+</div>
