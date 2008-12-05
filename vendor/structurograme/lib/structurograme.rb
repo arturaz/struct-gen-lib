@@ -3,7 +3,7 @@
 # vim:tabstop=2
 # vim:shiftwidth=2
 #
-# @author ArtÅ«ras Å lajus <x11@arturaz.net>
+# @author Artûras Ðlajus <x11@arturaz.net>
 # @license http://creativecommons.org/licenses/LGPL/2.1/ CC-GNU LGPL
 
 $LOAD_PATH.push File.dirname(__FILE__)
@@ -13,6 +13,7 @@ require 'extensions/libxml.rb'
 XML::Error.set_handler(&XML::Error::QUIET_HANDLER)
 
 require 'RMagick'
+require 'extensions/rmagick.rb'
 require 'activesupport'
 require 'tempfile'
 
@@ -22,14 +23,6 @@ require 'structurograme/block.rb'
 require 'structurograme/call.rb'
 require 'structurograme/if.rb'
 require 'structurograme/while.rb'
-
-class CustomDraw < Magick::Draw
-  def text(*args)
-    opacity(1)
-    super(*args)
-    fill_opacity(0)
-  end
-end
 
 class Structurograme  
   # Exception to be raised if we're trying to give not XML node.
@@ -114,6 +107,7 @@ class Structurograme
     @root.height + @padding + 3
   end
 
+  # Render current structurograme. Return PNG image as string.
   def render    
     @draw = CustomDraw.new
     @draw.fill('black')

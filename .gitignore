@@ -1,4 +1,8 @@
 doc/app
-nbproject
 coverage
+vendor/structurograme/doc
+vendor/structurograme/coverage
+nbproject
 *.png
+*.swp
+log/*

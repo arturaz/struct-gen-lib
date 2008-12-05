@@ -24,6 +24,30 @@ Spec::Rake::SpecTask.new(:rcov) do |t|
   end
 end
 
+STATS_DIRECTORIES = [
+  %w(Library            lib),
+  %w(Unit\ tests        spec/specs)
+].select { |name, dir| File.directory?(dir) }
+
+desc "Report code statistics (KLOCs, etc) from the application"
+task :stats do
+  require 'code_statistics'
+  CodeStatistics.new(*STATS_DIRECTORIES).to_s
+end
+
+require 'rake/rdoctask'
+desc "Generate documentation for the application. Set custom template with TEMPLATE=/path/to/rdoc/template.rb or title with TITLE=\"Custom Title\""
+Rake::RDocTask.new("doc") { |rdoc|
+  rdoc.rdoc_dir = 'doc/lib'
+  rdoc.template = ENV['template'] if ENV['template']
+  rdoc.title    = ENV['title'] || "Structurograme library Documentation"
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.options << '--charset' << 'utf-8'
+  rdoc.rdoc_files.include('README')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+}
+
+
 
 desc "Default task is to run specs"
 task :default => :spec
