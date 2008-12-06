@@ -1,1 +1,6 @@
-Read vendor/structurograme/README.
+1. Read vendor/structurograme/README.
+2. Install rails and mongrel:
+gem install rails --version 2.1.2
+gem install mongrel
+3. Run server
+ruby script\server
